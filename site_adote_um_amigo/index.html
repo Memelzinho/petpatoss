@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Adote um Amigo!</title>
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <nav id="menu-lateral">
+    <ul>
+      <li><a href="#inicio"><i class="fas fa-home"></i> Início</a></li>
+      <li><a href="#animais"><i class="fas fa-paw"></i> Animais</a></li>
+      <li><a href="#colaboradores"><i class="fas fa-users"></i> Colaboradores</a></li>
+      <li><a href="#contato"><i class="fas fa-envelope"></i> Contato</a></li>
+      <li><a herf="#sobre"><i class="fas fa-ellipsis"></i> Sobre</a></li>
+    </ul>
+  </nav>
+
+  <section id="inicio">
+    <img src="imagens/banner3.png" alt="Adote um Amigo" class="banner">
+    <footer>
+    <h2>Conheça nossos amigos para adoção!</h2>
+  </footer>
+  </section>
+
+  <section id="animais">
+    <h2>Animais para Adoção</h2>
+    <div class="abas-animais">
+      <button class="aba-animais ativa" onclick="filtrarAnimais(this, 'todos')">Todos</button>
+      <button class="aba-animais" onclick="filtrarAnimais(this, 'Cachorro')">Cachorros</button>
+      <button class="aba-animais" onclick="filtrarAnimais(this, 'Gato')">Gatos</button>
+      <button class="aba-animais" onclick="filtrarAnimais(this, 'Passarinho')">Passarinhos</button>
+      <button class="aba" onclick="mostrarAba(this, 'galeria')">Galeria</button>
+      <button class="aba" onclick="mostrarAba(this, 'formulario')">Formulário</button>
+    </div>
+    <div id="animais-container"></div>
+  </section>
+
+  <section class="colaboradores">
+    <h2>Nossos Colaboradores</h2>
+  
+    <div class="quadros-colaboradores">
+  
+      <div class="quadro-colaborador">
+        <img src="https://via.placeholder.com/150" alt="Foto do Colaborador 1">
+        <h3>Colaborador 1</h3>
+        <p>Especialista em cuidados animais.</p>
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+      </div>
+  
+      <div class="quadro-colaborador">
+        <img src="https://via.placeholder.com/150" alt="Foto do Colaborador 2">
+        <h3>Colaborador 2</h3>
+        <p>Organizador de eventos para pets.</p>
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+      </div>
+  
+      <div class="quadro-colaborador">
+        <img src="https://via.placeholder.com/150" alt="Foto do Colaborador 3">
+        <h3>Colaborador 3</h3>
+        <p>Designer de acessórios pet.</p>
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+      </div>
+  
+    </div>
+  </section>
+
+  <footer>
+  <section id="contato">
+    <h2>Contato</h2>
+    <a href="https://www.instagram.com/petpatoss/" target="_blank" rel="noopener">Instagram Pet Patos</a>
+  </section>
+  </footer>
+  
+  <footer>
+  <section id="sobre">
+    <h2>Sobre nós:</h2>
+    <p>Estamos fazendo esse projeto a fins de ajudar a 
+      diminuir o número de animais abandonados e
+      maltratados. Acreditamos que todos os animais merecem um lar e amor.
+      Nossa missão é encontrar pessoas que desejam adotar e ajudar esses animais 
+      a encontrar um novo lar.
+    </p>
+      <p>Feito pelos alunos do 8° ano do Colégio Fonseca Rodrigues.</p>
+  </section>
+</footer>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal()">&times;</span>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.js"></script>
+  <script>
+    const animais = [
+      {
+        nome: 'Bidu',
+        tipo: 'Cachorro',
+        icone: 'imagens/cachorro_icone.png',
+        galeria: ['imagens/galeria/cachorro1.png', 'imagens/galeria/cachorro2.png', 'imagens/galeria/cachorro3.png']
+      },
+      {
+        nome: 'Mimi',
+        tipo: 'Gato',
+        icone: 'imagens/gato_icone.png',
+        galeria: ['imagens/galeria/gato1.png', 'imagens/galeria/gato2.png', 'imagens/galeria/gato3.png']
+      },
+      {
+        nome: 'Piu-Piu',
+        tipo: 'Passarinho',
+        icone: 'imagens/passarinho_icone.png',
+        galeria: ['imagens/galeria/passarinho1.png', 'imagens/galeria/passarinho2.png', 'imagens/galeria/passarinho3.png']
+      },
+      {
+        nome: 'Princesa',
+        tipo: 'Cachorro',
+        icone: 'imagens/cachorro_icone.png',
+        galeria: ['imagens/galeria/cachorro1.png', 'imagens/galeria/cachorro2.png', 'imagens/galeria/cachorro3.png']
+      },
+      {
+        nome: 'Chico',
+        tipo: 'Gato',
+        icone: 'imagens/gato_icone.png',
+        galeria: ['imagens/galeria/gato1.png', 'imagens/galeria/gato2.png', 'imagens/galeria/gato3.png']
+      },
+      {
+        nome: 'Priquito',
+        tipo: 'Passarinho',
+        icone: 'imagens/passarinho_icone.png',
+        galeria: ['imagens/galeria/passarinho1.png', 'imagens/galeria/passarinho2.png', 'imagens/galeria/passarinho3.png']
+      },
+      {
+        nome: 'Bela',
+        tipo: 'Cachorro',
+        icone: 'imagens/cachorro_icone.png',
+        galeria: ['imagens/galeria/cachorro1.png', 'imagens/galeria/cachorro2.png', 'imagens/galeria/cachorro3.png']
+      },
+      {
+        nome: 'Snow',
+        tipo: 'Gato',
+        icone: 'imagens/gato_icone.png',
+        galeria: ['imagens/galeria/gato1.png', 'imagens/galeria/gato2.png', 'imagens/galeria/gato3.png']
+      },
+      {
+        nome: 'Buarque',
+        tipo: 'Passarinho',
+        icone: 'imagens/passarinho_icone.png',
+        galeria: ['imagens/galeria/passarinho1.png', 'imagens/galeria/passarinho2.png', 'imagens/galeria/passarinho3.png']
+      },
+      {
+        nome: 'Luna',
+        tipo: 'Cachorro',
+        icone: 'imagens/cachorro_icone.png',
+        galeria: ['imagens/galeria/cachorro1.png', 'imagens/galeria/cachorro2.png', 'imagens/galeria/cachorro3.png']
+      },
+      {
+        nome: 'Lola',
+        tipo: 'Gato',
+        icone: 'imagens/gato_icone.png',
+        galeria: ['imagens/galeria/gato1.png', 'imagens/galeria/gato2.png', 'imagens/galeria/gato3.png']
+      },
+      {
+        nome: 'Pingu',
+        tipo: 'Passarinho',
+        icone: 'imagens/passarinho_icone.png',
+        galeria: ['imagens/galeria/passarinho1.png', 'imagens/galeria/passarinho2.png', 'imagens/galeria/passarinho3.png']
+      },
+      {
+        nome: 'Benji',
+        tipo: 'Cachorro',
+        icone: 'imagens/cachorro_icone.png',
+        galeria: ['imagens/galeria/cachorro1.png', 'imagens/galeria/cachorro2.png', 'imagens/galeria/cachorro3.png']
+      },
+      {
+        nome: 'Yumi',
+        tipo: 'Gato',
+        icone: 'imagens/gato_icone.png',
+        galeria: ['imagens/galeria/gato1.png', 'imagens/galeria/gato2.png', 'imagens/galeria/gato3.png']
+      },
+      {
+        nome: 'Tico',
+        tipo: 'Passarinho',
+        icone: 'imagens/passarinho_icone.png',
+        galeria: ['imagens/galeria/passarinho1.png', 'imagens/galeria/passarinho2.png', 'imagens/galeria/passarinho3.png']
+      },
+      {
+        nome: 'Rambo',
+        tipo: 'Cachorro',
+        icone: 'imagens/cachorro_icone.png',
+        galeria: ['imagens/galeria/cachorro1.png', 'imagens/galeria/cachorro2.png', 'imagens/galeria/cachorro3.png']
+      }
+    ];
+    
+    const container = document.getElementById('animais-container');
+
+    function abrirModal(nome) {
+      const animal = animais.find(a => a.nome === nome);
+      const slides = animal.galeria.map(img => `<div class="glider-slide"><img src="${img}" alt="Imagem ${animal.tipo}"></div>`).join('');
+      document.querySelector(".modal-content").innerHTML = `
+        <span class="close" onclick="fecharModal()">&times;</span>
+        <h3>Inscrição para Adoção de ${nome}</h3>
+        <div class="abas">
+          <button class="aba ativa" onclick="mostrarAba(this, 'galeria')">Galeria</button>
+          <button class="aba" onclick="mostrarAba(this, 'formulario')">Formulário</button>
+        </div>
+        <div class="conteudo-aba" id="galeria">
+          <div class="glider-contain">
+            <div class="glider">${slides}</div>
+            <button class="glider-prev">«</button>
+            <button class="glider-next">»</button>
+          </div>
+        </div>
+        <div class="conteudo-aba" id="formulario" style="display:none;">
+          <form id="form-adocao">
+            <input type="text" placeholder="Seu nome completo" required><br>
+            <input type="email" placeholder="Seu e-mail" required><br>
+            <input type="tel" placeholder="Telefone para contato" required><br>
+            <button type="submit">Enviar Interesse</button>
+          </form>
+        </div>
+      `;
+      document.getElementById('modal').style.display = 'block';
+
+      new Glider(document.querySelector('.glider'), {
+        slidesToShow: 1,
+        dots: false,
+        arrows: {
+          prev: '.glider-prev',
+          next: '.glider-next'
+        }
+      });
+    }
+
+    function mostrarAba(botao, abaId) {
+      document.querySelectorAll('.aba').forEach(btn => btn.classList.remove('ativa'));
+      botao.classList.add('ativa');
+      document.querySelectorAll('.conteudo-aba').forEach(div => div.style.display = 'none');
+      document.getElementById(abaId).style.display = 'block';
+    }
+
+    function fecharModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('modal');
+      if (event.target === modal) fecharModal();
+    };
+
+    function filtrarAnimais(botao, tipo) {
+      document.querySelectorAll('.aba-animais').forEach(btn => btn.classList.remove('ativa'));
+      botao.classList.add('ativa');
+      container.innerHTML = '';
+      const animaisFiltrados = tipo === 'todos' ? animais : animais.filter(animal => animal.tipo === tipo);
+      animaisFiltrados.forEach(animal => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${animal.icone}" alt="${animal.nome}">
+          <h3>${animal.nome}</h3>
+          <p>Tipo: ${animal.tipo}</p>
+          <button onclick="abrirModal('${animal.nome}')">Quero Adotar</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    filtrarAnimais(document.querySelector('.aba-animais.ativa'), 'todos');
+  </script>
+</body>
+</html>
